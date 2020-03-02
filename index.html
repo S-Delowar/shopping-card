@@ -64,7 +64,7 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$ <span id="subtotal"> 1,278 </span></h5>
+                        <h5>$ <span id="sub-total"> 1,278 </span></h5>
                         <h5>$0</h5>
                         <h5>$<span id="total-price">1,278</span> </h5>
                      </div>
@@ -81,77 +81,89 @@
    <script>
       const increaseBtn1 = document.getElementById("product1-increase-btn");
       increaseBtn1.addEventListener("click", function(){
-         // const item1Number = document.getElementById("item1-number").value;
-         // const itemNum = parseFloat(item1Number);
-         // const totalItemNum = itemNum + 1;
-         // document.getElementById("item1-number").value = totalItemNum;
-         document.getElementById("item1-number").value = itemIncrease("item1-number");
-         const totalItem1 = itemIncrease("item1-number");
-         itemTotalPrice("item1-price", totalItem1 );
-
-         const subTotalPrice = itemTotalPrice("item1-price", totalItem1 ) + parseFloat(subTotalPrice("subtotal"));
-         document.getElementById("subtotal").innerText = subTotalPrice;
-
          
-         // const price1 = document.getElementById ("item1-price").innerText;
-         // const priceItem1 = parseFloat(price1);
-         // const totalPrice1 = totalItemNum * priceItem1;
-         // document.getElementById ("item1-price").innerText = totalPrice1;
+         itemNumberIncrease("item1-number");
+         const item1TotalPrice = itemTotalPrice("item1-price", 1219);
 
-         // const totalPrice = document.getElementById("total-price").innerText;
-         // const priceNum = parseFloat(totalPrice);
-         // const finalPrice = priceNum + totalPrice1;
-         // document.getElementById("total-price").innerText = finalPrice;
-
+         subTotalUpdate("item2-price", item1TotalPrice, "sub-total");
       })
+         
+        
       const reduceBtn1 = document.getElementById("product1-reduce-btn");
       reduceBtn1.addEventListener("click", function(){
-         document.getElementById("item1-number").value = itemReduce("item1-number");
-         const totalItem11 = itemReduce("item1-number");
-         itemTotalPrice("item1-price", totalItem11);
+         itemNumberReduce("item1-number");
+         const item1TotalPrice = itemTotalPrice("item1-price", -1219);
+
+         subTotalUpdate("item2-price", item1TotalPrice, "sub-total");
+      
       })
 
       
       const increaseBtn2 = document.getElementById("product2-increase-btn");
       increaseBtn2.addEventListener("click", function(){
-         document.getElementById("item2-number").value = itemIncrease("item2-number")
-         const totalItem2 = itemIncrease("item2-number");
-         itemTotalPrice("item2-price", totalItem2); 
+         itemNumberIncrease("item2-number");
+         const item2TotalPrice = itemTotalPrice("item2-price", 59);
+
+         subTotalUpdate("item1-price", item2TotalPrice, "sub-total");
+
+      
       })
 
       const reduceBtn2 = document.getElementById("product2-reduce-btn");
       reduceBtn2.addEventListener("click", function(){
-         document.getElementById("item2-number").value = itemReduce("item2-number");
-         const totalItem11 = itemReduce("item2-number");
-         itemTotalPrice("item2-price", totalItem11);
+         itemNumberReduce("item2-number");
+         const item2TotalPrice = itemTotalPrice("item2-price", -59);
+
+         subTotalUpdate("item1-price", item2TotalPrice, "sub-total");
+      //    document.getElementById("item2-number").value = itemReduce("item2-number");
+      //    const totalItem11 = itemReduce("item2-number");
+      //    itemTotalPrice("item2-price", totalItem11);
       })
 
 
 
-      function itemIncrease(id){
-         const item1Number = document.getElementById(id).value;
-         const itemNum = parseFloat(item1Number);
-         const totalItemNum = itemNum + 1;
-         if(totalItemNum>0){
-            return totalItemNum;
+      function itemNumberIncrease(id){
+         const itemNumber = document.getElementById(id).value;
+         const itemNum = parseFloat(itemNumber);
+         const totalItemNumber = itemNum + 1;
+         if(totalItemNumber>0){
+            document.getElementById(id).value = totalItemNumber;
+            return totalItemNumber;
          }
          return 0;
       }
-      function itemReduce(id){
-         const item1Number = document.getElementById(id).value;
-         const itemNum = parseFloat(item1Number);
-         const totalItemNum = itemNum - 1;
-         if(totalItemNum>0){
-            return totalItemNum;
+      function itemNumberReduce(id){
+         const itemNumber = document.getElementById(id).value;
+         const itemNum = parseFloat(itemNumber);
+         const totalItemNumber = itemNum - 1;
+         if(totalItemNumber>= 0){
+            document.getElementById(id).value = totalItemNumber;
+            return totalItemNumber;
          }
          return 0;
       }
 
-      function itemTotalPrice(id, itemNumber){
+      function itemTotalPrice(id, givenNumber){
          const price = document.getElementById(id).innerText;
          const priceNumber = parseFloat(price);
-         const totalItemPrice = priceNumber * itemNumber;
-         document.getElementById(id).innerText = totalItemPrice;
+         const totalAmount = priceNumber + givenNumber;
+         if(totalAmount >= 0){
+            document.getElementById(id).innerText = totalAmount;
+            return totalAmount;
+         }else{
+            return 0;
+         }
+      }
+
+      function subTotalUpdate(id1, givenNumber, id2){
+         const additionalPrice = document.getElementById(id1).innerText;
+         const priceNumber = parseFloat(additionalPrice);
+         const subTotalPrice = priceNumber + givenNumber;
+         document.getElementById(id2).innerText = subTotalPrice;
+      }
+
+      function finalAmount(id1, id2){
+         document.getElementById(id1).innerText = document.getElementById(id2).innerText;
       }
 
       // function subTotalPrice(id){
