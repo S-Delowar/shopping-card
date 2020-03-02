@@ -66,7 +66,7 @@
                      <div class="col-md-4 status">
                         <h5>$ <span id="sub-total"> 1,278 </span></h5>
                         <h5>$0</h5>
-                        <h5>$<span id="total-price">1,278</span> </h5>
+                        <h5>$<span id="total-amount">1,278</span> </h5>
                      </div>
                   </div>
                </div>
@@ -86,6 +86,7 @@
          const item1TotalPrice = itemTotalPrice("item1-price", 1219);
 
          subTotalUpdate("item2-price", item1TotalPrice, "sub-total");
+         finalAmount("total-amount", "sub-total");
       })
          
         
@@ -95,6 +96,7 @@
          const item1TotalPrice = itemTotalPrice("item1-price", -1219);
 
          subTotalUpdate("item2-price", item1TotalPrice, "sub-total");
+         finalAmount("total-amount", "sub-total");
       
       })
 
@@ -105,6 +107,7 @@
          const item2TotalPrice = itemTotalPrice("item2-price", 59);
 
          subTotalUpdate("item1-price", item2TotalPrice, "sub-total");
+         finalAmount("total-amount", "sub-total");
 
       
       })
@@ -115,6 +118,7 @@
          const item2TotalPrice = itemTotalPrice("item2-price", -59);
 
          subTotalUpdate("item1-price", item2TotalPrice, "sub-total");
+         finalAmount("total-amount", "sub-total");
       //    document.getElementById("item2-number").value = itemReduce("item2-number");
       //    const totalItem11 = itemReduce("item2-number");
       //    itemTotalPrice("item2-price", totalItem11);
